@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#calculo").submit(function(e){
+                e.preventDefault();
+                $.ajax({
+                    url:$(this).attr('action'),
+                    type:$(this).attr('method'),
+                    data:$(this).serialize(),
+                    dataType : 'json',
+
+                    beforeSend : function(){
+                        $('#resultado').html("<img src='https://k45.kn3.net/taringa/3/7/4/6/6/3/2/ser22008/8E5.gif?4411'/>");
+                    },
+
+                    success : function(result){
+                        console.log(result)
+                        $('#titulo_result').text('La TMC a aplicar es :');
+                        $('#resultado').html(result.TMC);
+                    }
+                })
+
+
+
+            })
+        })
+
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <style>
+        section {
+            width: 400px;
+            height: auto;
+            margin: 50px auto auto;
+            border: .1rem solid #acadae;
+        }
+        .result {
+            width: 400px;
+            height: auto;
+            margin: auto auto auto;
+        }
+
+
+        .calculo {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        
+    <form class='calculo' id="calculo" action="/search-tmc">
+
+        <h5>Calculo de TMC ( Tasa de Interés Máxima Convencional)</h5>
+        <div class="form-group">
+          <label for="uf">Monto UF</label>
+          <input type="number" class="form-control" name="uf" placeholder="100 UF" min="1">
+        </div>
+        <div class="form-group">
+            <label for="dias">Dias</label>
+            <input type="number" class="form-control" name="dias" placeholder="dias" min="1"> 
+          </div>
+          <div class="form-group">
+            <label for="fecha">Fecha</label>
+            <input type="date" class="form-control" name="fecha" placeholder="dd mm AAAA">
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-10">
+              <button type="submit" class="btn btn-primary">Calcular</button>
+            </div>
+          </div>
+
+          
+    </form>
+    </section>
+
+
+    <h1 class="result" id=titulo_result></h1>
+    <h3 class="result" id=resultado></h3>
+
+</body>
+</html>
