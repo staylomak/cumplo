@@ -18,8 +18,6 @@ def management_date(fecha):
 
 def encoder(codigo, f):
     cmf_key= "9c84db4d447c80c74961a72245371245cb7ac15f"
-    print('aqui esta el problema')
-    print(f[-2])
     url = "https://api.sbif.cl/api-sbifv3/recursos_api/tmc/"+f[-1]+"/"+f[-2]+"?apikey="+cmf_key+"&formato=JSON"
     print("SOY LA RUTA:" +url)
     response = requests.get(url)
